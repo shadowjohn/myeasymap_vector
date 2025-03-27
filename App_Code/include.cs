@@ -4,9 +4,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Web;
-using System.Data;
-using System.Data.SQLite;
-using System.IO.Compression;
 using Ionic.Zip;
 
 
@@ -287,119 +284,7 @@ namespace utility
         {
             HttpContext.Current.Response.BinaryWrite(value);
         }
-        public byte[] deflate(byte[] input)
-        {
-            MemoryStream ms = new MemoryStream();
-            System.IO.Compression.DeflateStream ds = new System.IO.Compression.DeflateStream(ms, System.IO.Compression.CompressionMode.Compress);
-            ds.Write(input, 0, input.Length);
-            ds.Close();
-            return ms.ToArray();
-        }
-        // 使用 Deflate 解壓縮資料
-        public byte[] decompressDeflateContent(byte[] compressedData)
-        {
-            using (MemoryStream memoryStream = new MemoryStream(compressedData))
-            using (DeflateStream deflateStream = new DeflateStream(memoryStream, CompressionMode.Decompress))
-            using (MemoryStream outputMemoryStream = new MemoryStream())
-            {
-                // 將解壓縮資料寫入 outputMemoryStream
-                deflateStream.CopyTo(outputMemoryStream);
 
-                // 將解壓縮後的資料轉換為字串
-                return outputMemoryStream.ToArray();
-            }
-        }
-        // 解壓縮 GZIP 資料
-        public byte[] decompressContent(byte[] compressedData)
-        {
-            using (MemoryStream memoryStream = new MemoryStream(compressedData))
-            using (GZipStream gzipStream = new GZipStream(memoryStream, CompressionMode.Decompress))
-            using (MemoryStream outputMemoryStream = new MemoryStream())
-            {
-                // 將解壓縮的資料寫入到 outputMemoryStream
-                gzipStream.CopyTo(outputMemoryStream);
-
-                // 將解壓縮後的資料轉換為字串
-                return outputMemoryStream.ToArray();
-            }
-        }
-
-        public byte[] compressContent(byte[] data)
-        {
-            // 創建 MemoryStream 來壓縮資料
-            // 使用 GZipStream 壓縮並傳送資料
-            // 使用 MemoryStream 作為壓縮的輸出流
-            using (MemoryStream compressedStream = new MemoryStream())
-            {
-                // 使用 GZipStream 來進行壓縮，並將結果寫入到 compressedStream 中
-                using (GZipStream gzipStream = new GZipStream(compressedStream, CompressionLevel.Optimal, true))
-                {
-                    // 把資料寫入 GZipStream，進行壓縮
-                    gzipStream.Write(data, 0, data.Length);
-                }
-
-                // 返回壓縮後的 byte[]
-                return compressedStream.ToArray();
-            }
-
-        }
-        public string base64_encode(string data)
-        {
-            //base64編碼
-            return Convert.ToBase64String(s2b(data));
-
-        }
-        public string base64_encode(byte[] data)
-        {
-            //base64編碼
-            return Convert.ToBase64String(data);
-
-        }
-        public byte[] base64_decode(string data)
-        {
-            //base64解碼
-
-            return Convert.FromBase64String(data);
-        }
-        // GZIP 壓縮方法
-        public byte[] Compress(byte[] data)
-        {
-            using (MemoryStream compressedStream = new MemoryStream())
-            using (System.IO.Compression.GZipStream gzipStream = new System.IO.Compression.GZipStream(compressedStream, System.IO.Compression.CompressionLevel.Optimal, true))
-            {
-                gzipStream.Write(data, 0, data.Length);
-                return compressedStream.ToArray();
-            }
-        }
-        public DataTable sqlite_selectSQL_SAFE(string filename, string sql, Dictionary<string, object> pa)
-        {
-            DataTable dt = new DataTable();
-
-            // 連接到 SQLite 資料庫
-            using (var conn = new SQLiteConnection("Data Source=" + filename))
-            {
-                conn.Open();
-
-                // 創建 SQLite 命令並設定 SQL 語句與參數
-                using (var cmd = new SQLiteCommand(sql, conn))
-                {
-                    // 將參數加入到命令中
-                    foreach (var param in pa)
-                    {
-                        cmd.Parameters.AddWithValue("@" + param.Key, param.Value);
-                    }
-
-                    // 使用 SQLiteDataReader 來執行查詢
-                    using (var reader = cmd.ExecuteReader())
-                    {
-                        // 將結果加載到 DataTable 中
-
-                        dt.Load(reader);
-                    }
-                }
-            }
-            return dt;
-        }
         public byte[] ExtractZipToBytes(string zipFilePath, string fileNameInZip)
         {
             try

@@ -89,62 +89,6 @@
 
                 my.exit();
             }
-            break;
-        case "getMapFromDB":
-            {
-                GETS_STRING = "osmData,x,y,z";
-                GETS = my.getGET_POST(GETS_STRING, "GET");
-                int x = Convert.ToInt32(GETS["x"].ToString());
-                int y = Convert.ToInt32(GETS["y"].ToString());
-                int z = Convert.ToInt32(GETS["z"].ToString());
-                y = ((1 << z) - y - 1);
-                string osmName = my.mainname(GETS["osmData"].ToString());
-                string osmDataFile = Path.Combine(my.basedir(), "data", osmName, osmName) + ".db";
-                if (!my.is_file(osmDataFile))
-                {
-                    my.exit();
-                }
-                // 從 db 讀出資料
-                string SQL = @"
-                    SELECT 
-                         `tile_data`     
-                    FROM                 
-                        `tiles`
-                    WHERE 
-                        1=1
-                        AND  `zoom_level` = @z
-                        AND  `tile_column` = @x
-                        AND  `tile_row` = @y                                      
-                    LIMIT 1
-                ";
-                var pa = new Dictionary<string, object>();
-                pa["x"] = x;
-                pa["y"] = y;
-                pa["z"] = z;
-
-                var ra = my.sqlite_selectSQL_SAFE(osmDataFile, SQL, pa);
-                if (ra.Rows.Count == 0)
-                {
-                    my.exit();
-                }
-                byte[] b = (byte[])ra.Rows[0]["tile_data"];
-                //b = my.deflate(b);
-                // 這個是 zip 要 unzip 
-                //b = my.deflate(b);
-                //b = my.Compress(b);
-
-                HttpContext.Current.Response.Clear();
-                HttpContext.Current.Response.Headers.Add("Content-Transfer-Encoding", "binary");
-                HttpContext.Current.Response.Headers.Add("Content-Type", "application/x-protobuf");
-                HttpContext.Current.Response.Headers.Add("Content-Disposition", "attachment; filename=\"" + z + "_" + x + "_" + y + ".pbf\"");
-                //HttpContext.Current.Response.Headers.Add("Content-Encoding", "gzip");
-                //byte[] binaryData = my.s2b(ra.Rows[0]["tile_data"]);
-                if (b != null)
-                {
-                    my.echoBinary(b);
-                }
-                my.exit();
-            }
-            break;
+            break;        
     }
 %>
