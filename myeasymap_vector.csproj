@@ -1,0 +1,448 @@
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5F6B386D-E61D-4CF6-91E5-787DC75F1BA8}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>myeasymap_vector</RootNamespace>
+    <AssemblyName>myeasymap_vector</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Data.Sqlite, Version=9.0.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Data.Sqlite.Core.9.0.3\lib\netstandard2.0\Microsoft.Data.Sqlite.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.batteries_v2, Version=2.1.10.2445, Culture=neutral, PublicKeyToken=8226ea5df37bcae9, processorArchitecture=MSIL">
+      <HintPath>packages\SQLitePCLRaw.bundle_e_sqlite3.2.1.10\lib\net461\SQLitePCLRaw.batteries_v2.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.core, Version=2.1.10.2445, Culture=neutral, PublicKeyToken=1488e028ca7ab535, processorArchitecture=MSIL">
+      <HintPath>packages\SQLitePCLRaw.core.2.1.10\lib\netstandard2.0\SQLitePCLRaw.core.dll</HintPath>
+    </Reference>
+    <Reference Include="SQLitePCLRaw.provider.dynamic_cdecl, Version=2.1.10.2445, Culture=neutral, PublicKeyToken=b68184102cba0b3b, processorArchitecture=MSIL">
+      <HintPath>packages\SQLitePCLRaw.provider.dynamic_cdecl.2.1.10\lib\netstandard2.0\SQLitePCLRaw.provider.dynamic_cdecl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.SQLite, Version=1.0.119.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.119.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>packages\System.Data.SQLite.EF6.1.0.119.0\lib\net46\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.119.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>packages\System.Data.SQLite.Linq.1.0.119.0\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="api.aspx" />
+    <Content Include="default.htm" />
+    <Content Include="sprites\osm-liberty.png" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_Code\include.cs">
+      <SubType>Component</SubType>
+    </Content>
+    <Compile Include="api.aspx.cs">
+      <DependentUpon>api.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="data\Taiwan_2025_03_27_gis\Taiwan_2025_03_27_gis.db" />
+    <Content Include="data\Taiwan_2025_03_27_gis\Taiwan_2025_03_27_gis.style" />
+    <Content Include="data\Taiwan_2025_03_27_gis\Taiwan_2025_03_27_gis.v3" />
+    <Content Include="pbf_fonts\NotoSansRegular\0-255.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\1024-1279.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\10240-10495.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\10496-10751.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\10752-11007.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\11008-11263.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\11264-11519.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\11520-11775.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\11776-12031.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\12032-12287.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\12288-12543.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\12544-12799.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\1280-1535.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\12800-13055.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\13056-13311.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\13312-13567.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\13568-13823.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\13824-14079.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\14080-14335.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\14336-14591.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\14592-14847.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\14848-15103.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\15104-15359.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\1536-1791.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\15360-15615.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\15616-15871.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\15872-16127.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\16128-16383.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\16384-16639.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\16640-16895.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\16896-17151.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\17152-17407.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\17408-17663.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\17664-17919.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\1792-2047.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\17920-18175.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\18176-18431.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\18432-18687.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\18688-18943.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\18944-19199.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\19200-19455.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\19456-19711.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\19712-19967.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\19968-20223.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\20224-20479.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\2048-2303.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\20480-20735.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\20736-20991.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\20992-21247.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\21248-21503.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\21504-21759.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\21760-22015.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\22016-22271.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\22272-22527.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\22528-22783.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\22784-23039.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\2304-2559.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\23040-23295.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\23296-23551.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\23552-23807.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\23808-24063.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\24064-24319.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\24320-24575.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\24576-24831.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\24832-25087.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\25088-25343.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\25344-25599.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\256-511.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\2560-2815.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\25600-25855.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\25856-26111.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\26112-26367.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\26368-26623.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\26624-26879.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\26880-27135.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\27136-27391.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\27392-27647.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\27648-27903.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\27904-28159.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\2816-3071.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\28160-28415.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\28416-28671.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\28672-28927.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\28928-29183.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\29184-29439.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\29440-29695.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\29696-29951.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\29952-30207.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\30208-30463.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\30464-30719.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\3072-3327.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\30720-30975.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\30976-31231.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\31232-31487.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\31488-31743.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\31744-31999.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\32000-32255.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\32256-32511.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\32512-32767.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\32768-33023.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\33024-33279.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\3328-3583.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\33280-33535.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\33536-33791.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\33792-34047.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\34048-34303.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\34304-34559.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\34560-34815.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\34816-35071.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\35072-35327.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\35328-35583.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\35584-35839.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\3584-3839.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\35840-36095.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\36096-36351.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\36352-36607.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\36608-36863.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\36864-37119.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\37120-37375.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\37376-37631.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\37632-37887.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\37888-38143.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\38144-38399.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\3840-4095.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\38400-38655.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\38656-38911.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\38912-39167.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\39168-39423.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\39424-39679.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\39680-39935.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\39936-40191.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\40192-40447.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\40448-40703.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\40704-40959.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\4096-4351.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\40960-41215.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\41216-41471.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\41472-41727.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\41728-41983.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\41984-42239.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\42240-42495.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\42496-42751.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\42752-43007.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\43008-43263.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\43264-43519.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\4352-4607.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\43520-43775.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\43776-44031.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\44032-44287.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\44288-44543.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\44544-44799.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\44800-45055.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\45056-45311.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\45312-45567.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\45568-45823.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\45824-46079.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\4608-4863.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\46080-46335.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\46336-46591.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\46592-46847.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\46848-47103.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\47104-47359.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\47360-47615.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\47616-47871.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\47872-48127.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\48128-48383.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\48384-48639.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\4864-5119.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\48640-48895.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\48896-49151.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\49152-49407.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\49408-49663.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\49664-49919.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\49920-50175.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\50176-50431.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\50432-50687.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\50688-50943.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\50944-51199.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\512-767.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\5120-5375.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\51200-51455.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\51456-51711.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\51712-51967.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\51968-52223.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\52224-52479.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\52480-52735.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\52736-52991.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\52992-53247.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\53248-53503.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\53504-53759.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\5376-5631.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\53760-54015.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\54016-54271.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\54272-54527.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\54528-54783.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\54784-55039.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\55040-55295.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\55296-55551.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\55552-55807.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\55808-56063.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\56064-56319.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\5632-5887.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\56320-56575.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\56576-56831.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\56832-57087.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\57088-57343.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\57344-57599.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\57600-57855.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\57856-58111.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\58112-58367.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\58368-58623.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\58624-58879.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\5888-6143.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\58880-59135.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\59136-59391.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\59392-59647.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\59648-59903.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\59904-60159.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\60160-60415.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\60416-60671.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\60672-60927.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\60928-61183.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\61184-61439.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\6144-6399.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\61440-61695.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\61696-61951.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\61952-62207.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\62208-62463.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\62464-62719.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\62720-62975.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\62976-63231.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\63232-63487.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\63488-63743.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\63744-63999.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\6400-6655.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\64000-64255.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\64256-64511.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\64512-64767.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\64768-65023.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\65024-65279.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\65280-65535.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\6656-6911.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\6912-7167.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\7168-7423.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\7424-7679.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\768-1023.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\7680-7935.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\7936-8191.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\8192-8447.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\8448-8703.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\8704-8959.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\8960-9215.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\9216-9471.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\9472-9727.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\9728-9983.pbf" />
+    <Content Include="pbf_fonts\NotoSansRegular\9984-10239.pbf" />
+    <Content Include="sprites\osm-liberty.json" />
+    <Content Include=".editorconfig" />
+    <Content Include="data\Taiwan_2025_03_27_gis\vacuum.php" />
+    <Content Include="data\Taiwan_2025_03_27_gis\runzip.php" />
+    <None Include="packages.config" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1580</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1580/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>此專案參考這部電腦上所缺少的 NuGet 套件。請啟用 NuGet 套件還原，以下載該套件。如需詳細資訊，請參閱 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的檔案是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+  </Target>
+  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.119.0\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
