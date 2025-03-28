@@ -2,10 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Net;
 using System.Web;
-using Ionic.Zip;
-
 
 namespace utility
 {
@@ -289,20 +288,21 @@ namespace utility
         {
             try
             {
-                using (ZipFile zip = ZipFile.Read(zipFilePath))
+                using (FileStream fs = new FileStream(zipFilePath, FileMode.Open, FileAccess.Read))
+                using (System.IO.Compression.ZipArchive archive = new System.IO.Compression.ZipArchive(fs, System.IO.Compression.ZipArchiveMode.Read))
                 {
                     // 找到指定的檔案條目
-                    ZipEntry entry = zip[fileNameInZip];
+                    System.IO.Compression.ZipArchiveEntry entry = archive.GetEntry(fileNameInZip.Replace("\\", "/"));
 
-                    // 檢查該條目是否存在
                     if (entry != null)
                     {
                         using (MemoryStream ms = new MemoryStream())
+                        using (Stream zipStream = entry.Open())
                         {
                             // 將檔案內容從 ZipEntry 複製到 MemoryStream
-                            entry.Extract(ms);
+                            zipStream.CopyTo(ms);
 
-                            // 將 MemoryStream 的內容轉換為 byte[]
+                            // 返回 MemoryStream 轉換為 byte[]
                             return ms.ToArray();
                         }
                     }
@@ -315,7 +315,7 @@ namespace utility
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error extracting ZIP file: " + ex.Message);
+                Console.WriteLine("Error extracting file from ZIP: " + ex.Message);
                 return null;
             }
         }
