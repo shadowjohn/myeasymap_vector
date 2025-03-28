@@ -288,36 +288,27 @@ namespace utility
         {
             try
             {
-                using (FileStream fs = new FileStream(zipFilePath, FileMode.Open, FileAccess.Read))
+                using (FileStream fs = new FileStream(zipFilePath, FileMode.Open, FileAccess.Read, FileShare.Read))
                 using (System.IO.Compression.ZipArchive archive = new System.IO.Compression.ZipArchive(fs, System.IO.Compression.ZipArchiveMode.Read))
                 {
-                    // 找到指定的檔案條目
+                    // 找到 ZIP 內的目標檔案
                     System.IO.Compression.ZipArchiveEntry entry = archive.GetEntry(fileNameInZip.Replace("\\", "/"));
-
                     if (entry != null)
                     {
-                        using (MemoryStream ms = new MemoryStream())
                         using (Stream zipStream = entry.Open())
+                        using (MemoryStream ms = new MemoryStream((int)entry.Length))  // 設置初始容量
                         {
-                            // 將檔案內容從 ZipEntry 複製到 MemoryStream
-                            zipStream.CopyTo(ms);
-
-                            // 返回 MemoryStream 轉換為 byte[]
+                            zipStream.CopyTo(ms);  // 直接複製
                             return ms.ToArray();
                         }
-                    }
-                    else
-                    {
-                        Console.WriteLine("File not found in ZIP: " + fileNameInZip);
-                        return null;
                     }
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine("Error extracting file from ZIP: " + ex.Message);
-                return null;
             }
+            return null;
         }
     }
 }

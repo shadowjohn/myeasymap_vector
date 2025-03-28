@@ -89,6 +89,70 @@
 
                 my.exit();
             }
-            break;        
+            break;
+        case "offline_basemap":
+            {
+                GETS_STRING = "layer,TileMatrix,TileCol,TileRow";
+                GETS = my.getGET_POST(GETS_STRING, "GET");
+                int z = Convert.ToInt32(GETS["TileMatrix"].ToString());
+                int x = Convert.ToInt32(GETS["TileCol"].ToString());
+                int y = Convert.ToInt32(GETS["TileRow"].ToString());
+                string layerName = my.mainname(GETS["layer"].ToString());
+                switch (layerName)
+                {
+                    case "CH_3857_Vect_OpenData":
+                    case "CH_3857_Contour_OpenData":
+                        {
+                            // 測繪離線地圖
+                            string offlineFile = Path.Combine(my.basedir(), "data", layerName + ".zip");
+                            if (!my.is_file(offlineFile))
+                            {
+                                // 檔案不存在
+                                my.exit();
+                            }
+                            // 參考筆記：https://3wa.tw/mypaper/?uid=shadow&mode=view&id=1689
+                            // 坐標轉換 x y z -> //國土測繪Tiles1編碼  \LZZ\RXXXXXXXX\CYYYYYYYY.png
+                            //轉換16進位 C:x
+                            string CHex = String.Format("{0:x}", x);
+
+                            //補足8碼
+                            CHex = CHex.PadLeft(8, '0');
+
+                            //轉換16進位 R:y
+                            string RHex = String.Format("{0:x}", y);
+
+                            //補足8碼
+                            RHex = RHex.PadLeft(8, '0');
+
+                            //補足2碼
+                            string LZoom = z.ToString().PadLeft(2, '0');
+                            string LayerFile = Path.Combine(my.basedir(), "data", layerName, "L" + LZoom, "R" + RHex, "C" + CHex + ".jpg");
+                            if (my.is_file(LayerFile))
+                            {
+                                HttpContext.Current.Response.Clear();
+                                HttpContext.Current.Response.Headers.Add("Content-Type", "image/jpeg");
+                                HttpContext.Current.Response.Headers.Add("Content-Length", my.filesize(LayerFile).ToString());
+                                HttpContext.Current.Response.TransmitFile(LayerFile);
+                            }
+
+                            /*
+                            // 從 zip 取資料 
+                            // 太慢
+                            byte[] b = my.ExtractZipToBytes(offlineFile, LayerFile);
+                            if (b != null)
+                            {
+                                HttpContext.Current.Response.Clear();
+                                HttpContext.Current.Response.Headers.Add("Content-Type", "image/jpeg");
+                                HttpContext.Current.Response.BinaryWrite(b);
+                                Array.Clear(b, 0, b.Length);
+                            }
+                            */
+                            my.exit();
+                        }
+                        break;
+                }
+                my.exit();
+            }
+            break;
     }
 %>

@@ -399,3 +399,7 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 /old
+/myeasymap_vector/data/CH_3857_Contour_OpenData.zip
+/myeasymap_vector/data/CH_3857_Vect_OpenData.zip
+/myeasymap_vector/data/CH_3857_Contour_OpenData
+/myeasymap_vector/data/CH_3857_Vect_OpenData

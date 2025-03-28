@@ -42,6 +42,8 @@
             <option value="EMAP5" selected>(線上) 臺灣通用電子地圖</option>
             <option value="google">(線上) Google街道圖</option>
             <option value="osm">(線上) Openstreet Map</option>
+            <option value="CH_3857_Contour_OpenData">(離線) [政府開放資料]臺灣通用電子地圖(套疊等高線)圖磚封裝檔(GIS用)</option>
+            <option value="CH_3857_Vect_OpenData">(離線) [政府開放資料]臺灣通用電子地圖(不含等高線)圖磚封裝檔(GIS用)</option>
         </select>
         <br />
         <label>
@@ -95,11 +97,52 @@
                         //App.items.map.switchMap($("select[reqc='basemap']").val());
                     }
                 });
-            }
+            },
+            "registerMaps": function () {
+                // 註冊地圖
+                {
+                    // 1. (離線) [政府開放資料]臺灣通用電子地圖(套疊等高線)圖磚封裝檔(GIS用)
+                    var op = {
+                        "bg": true, // bg 為 true 時，為最下層的底圖，當 map addItem 後，需用 switchMap 才能切換
+                        "name": "CH_3857_Contour_OpenData",
+                        "chname": "(離線)臺灣通用電子地圖(套疊等高線)",
+                        "url": "api.aspx?mode=offline_basemap&z=${z}&x=${x}&y=${y}",
+                        "layer": "CH_3857_Contour_OpenData",
+                        "matrixSet": "EPSG:3857",
+                        "format": "image/png",
+                        "zoomOffset": 0,
+                        "tileOptions": { "crossOriginKeyword": null },
+                        "crossOrigin": "",
+                        "transparent": false
+
+                    };
+                    var wmts = new dgSource("WMTS", op)
+                    App.items.map.addItem(wmts);
+                }
+
+                {
+                    // 2. (離線) [政府開放資料]臺灣通用電子地圖(不含等高線)圖磚封裝檔(GIS用)
+                    op = {
+                        "bg": true, // bg 為 true 時，為最下層的底圖，當 map addItem 後，需用 switchMap 才能切換
+                        "name": "CH_3857_Vect_OpenData",
+                        "chname": "(離線)臺灣通用電子地圖(套疊等高線)",
+                        "url": "api.aspx?mode=offline_basemap",
+                        "layer": "CH_3857_Vect_OpenData",
+                        "matrixSet": "EPSG:3857",
+                        "format": "image/png",
+                        "zoomOffset": 0
+                    };
+                    wmts = new dgSource("WMTS", op);
+                    App.items.map.addItem(wmts);
+                }
+            },
         },
         init: function () {
             App.methods.ui_init();
             App.items.map = new Easymap("map");
+            // 顯示 Z 軸
+            App.items.map.statusbar.is_enable_z = true;
+            App.methods.registerMaps(); // 註冊地圖
             App.items.map.switchMap($("select[reqc='basemap']").val());
         }
     };
